@@ -1,59 +1,59 @@
-# STM32F072 ile DHT11 Sıcaklık-Nem Ölçümü ve I2C LCD Gösterimi 🌡️💧📟
+# STM32F072 - Temperature & Humidity Monitoring with DHT11 and I2C LCD 🌡️💧📟
 
-Bu projede, **STM32F072** mikrodenetleyicisi kullanılarak **DHT11 sensöründen** sıcaklık ve nem verileri okunmuş ve bu veriler **I2C protokolü ile bağlı LCD ekranda** gösterilmiştir. Bu uygulama, temel sensör okuma, I2C haberleşme ve LCD ile veri görselleştirme gibi konuları kapsar.
+This project demonstrates how to interface a **DHT11 temperature and humidity sensor** and display the readings on an **I2C LCD** using the **STM32F072** microcontroller. It's a basic embedded systems project focused on sensor reading, I2C communication, and LCD visualization.
 
-## 🛠️ Kullanılan Donanımlar
+## 🛠️ Hardware Components
 
-- STM32F072 Geliştirme Kartı
-- DHT11 Sıcaklık ve Nem Sensörü
-- I2C LCD Ekran (16x2 veya 20x4, PCF8574 modülü ile)
-- Breadboard ve jumper kablolar
-- Gerekirse USB - UART (debug için)
+- STM32F072 Development Board
+- DHT11 Temperature & Humidity Sensor
+- I2C LCD Display (16x2 or 20x4 with PCF8574 backpack)
+- Breadboard and jumper wires
+- (Optional) USB-to-Serial adapter for debugging
 
-## ⚙️ Kullanılan Yazılım ve Araçlar
+## ⚙️ Software & Tools Used
 
 - STM32CubeIDE
-- HAL (Hardware Abstraction Layer) kütüphaneleri
-- DHT11 sürücüsü
-- I2C LCD sürücüsü (`lcd_i2c.c/.h`)
-- (Opsiyonel) UART üzerinden seri monitör desteği
+- STM32 HAL Libraries
+- Custom DHT11 driver
+- I2C LCD driver (`lcd_i2c.c/.h`)
+- (Optional) Tera Term / PuTTY for UART debugging
 
-## 🔌 Donanım Bağlantıları
+## 🔌 Connections
 
-### DHT11 Bağlantısı
+### DHT11 Sensor
 
-| DHT11 Pinleri | STM32F072 Pinleri |
-|---------------|-------------------|
-| VCC           | 3.3V              |
-| GND           | GND               |
-| DATA          | PA1 (örnek)       |
+| DHT11 Pins | STM32F072 Pins |
+|------------|----------------|
+| VCC        | 3.3V           |
+| GND        | GND            |
+| DATA       | PA1 (example)  |
 
-### LCD (I2C) Bağlantısı
+### I2C LCD Display
 
-| LCD Pinleri | STM32F072 Pinleri |
-|-------------|-------------------|
-| SDA         | PB7 (örnek)       |
-| SCL         | PB6 (örnek)       |
-> Not: LCD'nin I2C adresi genellikle `0x27` veya `0x3F` olabilir. Kod içinde buna dikkat edilmelidir.
+| LCD Pins | STM32F072 Pins |
+|----------|----------------|
+| SDA      | PB7 (example)  |
+| SCL      | PB6 (example)  |
 
-## 🧪 Projenin Çalışması
+> Note: I2C LCD address is usually `0x27` or `0x3F`. Make sure to configure it correctly in your code.
 
-1. STM32 başlatıldığında, DHT11 sensöründen sıcaklık ve nem verileri okunur.
-2. Okunan değerler I2C ile bağlı olan LCD ekranın birinci ve ikinci satırında gösterilir:
-3. Okumalar belirli aralıklarla (örneğin her 2 saniyede bir) yenilenir.
+## 📋 Project Description
 
-## 📦 Proje Dosya Yapısı
+- On boot, the STM32F072 reads temperature and humidity data from the DHT11 sensor.
+- The data is then displayed on the LCD via I2C in the following format:
+- Measurements are updated periodically (e.g., every 2 seconds).
 
-- `Core/` → STM32CubeIDE kaynak dosyaları (`main.c`, `gpio.c`, `i2c.c`, vs.)
-- `Drivers/` → HAL ve kullanıcı sürücüleri (`dht11.c/.h`, `lcd_i2c.c/.h`)
-- `README.md` → Bu dosya
+## 📁 Project Structure
+stm32f072-dht11-lcd/
+│
+├── Core/ # STM32CubeIDE source files (main.c, gpio.c, i2c.c, etc.)
+├── Drivers/ # HAL libraries and custom drivers
+│ ├── dht11.c/.h # DHT11 sensor driver
+│ └── lcd_i2c.c/.h # I2C LCD display driver
+├── README.md # This file
+## 🚀 Getting Started
 
-## 📸 Ekran Görüntüsü (Opsiyonel)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/stm32f072-dht11-lcd.git
 
-İstersen LCD ekranın gösterdiği sıcaklık-nem verilerinin fotoğrafını veya bağlantı şemasını buraya ekleyebilirsin.
-
-## 🚀 Kurulum ve Derleme
-
-1. Bu repoyu klonlayın:
-```bash
-git clone https://github.com/kullanici-adi/stm32f072-dht11-lcd.git
